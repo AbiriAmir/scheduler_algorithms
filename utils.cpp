@@ -98,7 +98,7 @@ int get_page_size(string s) {
 
 	int ans = atoi(temp.c_str());
 
-	if(s[ s.length() - 1] == 'k') 
+	if(s[s.length() - 1] == 'k') 
 		ans *= 1024;
 	else
 		ans *= 1024 * 1024;
