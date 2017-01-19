@@ -1,12 +1,12 @@
-#include "fifo_algorithm.h"
+#include "FifoAlgorithm.h"
 
 using namespace std;
 
-fifo_algorithm::fifo_algorithm(int number_of_frames, int page_size) : Algorithm(number_of_frames, page_size) {
+FifoAlgorithm::FifoAlgorithm(int number_of_frames, int page_size) : Algorithm(number_of_frames, page_size) {
 	// this->pages.resize(number_of_frames, -1);
 }
 
-void fifo_algorithm::_access(long long page) {
+void FifoAlgorithm::_access(long long page) {
 	for(list<long long>::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if(*it == page)
 			return;

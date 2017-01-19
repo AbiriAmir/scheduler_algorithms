@@ -1,4 +1,4 @@
-#include "algorithm.h"
+#include "Algorithm.h"
 
 Algorithm::Algorithm(int number_of_frames, int page_size) {
 	this->number_of_frames = number_of_frames;
