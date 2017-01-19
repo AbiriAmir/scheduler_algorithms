@@ -65,10 +65,12 @@ static inline std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
 
-int needed_pages(string file_name, int page_size) {
+
+void get_memory_references(string file_name, vector< pair<long long, int> > &references) {
 	ifstream fin(file_name.c_str());
 
-	set<long long> bytes;
+	references.clear();
+	// vector< pair<long long, int> > references;
 
 	string s;
 	while(getline(fin, s)) {
@@ -76,21 +78,24 @@ int needed_pages(string file_name, int page_size) {
 			continue;
 		vector<string> tokens = split(s, ' ');
 		long long addr = hex2l(tokens[2]);
-		// bytes.push_back(addr / page_size);
-		
 		int count = atoi(tokens[3].c_str());
-		// cout << tokens[3] << " : " << count << endl;
+
+		references.push_back(make_pair(addr, count));
+	}
+}
+
+int needed_pages(int page_size, const vector< pair<long long, int> > &references) {
+	set<long long> bytes;
+
+	for(int i = 0; i < references.size(); ++i) {
+		long long addr = references[i].first;
+		int count = references[i].second;
 
 		for(int i = 0; i < count; ++i)
 			bytes.insert((addr + count) / page_size);
 	}
 
 	return bytes.size();
-
-	// sort(bytes.begin(), bytes.end());
-
-	// vector<long long>::iterator it = std::unique (bytes.begin(), bytes.end());
-	// return std::distance(bytes.begin(), it);
 }
 
 int get_page_size(string s) {
@@ -111,6 +116,7 @@ int get_number_of_frames(int number_of_pages, string number_of_frames) {
 	if(number_of_frames[ number_of_frames.length() - 1 ] == '%') {
 		string tmp = number_of_frames.substr(0, number_of_frames.length() - 1);
 		ans = atoi(tmp.c_str());
+		ans = number_of_pages * ans / 100;
 	} else
 		ans = atoi(number_of_frames.c_str());
 

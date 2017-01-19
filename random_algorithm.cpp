@@ -1,6 +1,7 @@
 #include "random_algorithm.h"
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -16,10 +17,10 @@ void random_algorithm::_access(long long page) {
 
 	this->page_faults++;
 
-	int page_to_delete = rand() % pages.size();
-
-	if(pages.size() >= this->number_of_frames)
+	if(pages.size() >= this->number_of_frames) {
+		int page_to_delete = rand() % pages.size();
 		this->pages.erase(this->pages.begin() + page_to_delete);
+	}
 
 	this->pages.push_back(page);
 }

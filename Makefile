@@ -1,5 +1,5 @@
-a.out: main.cpp utils.o algorithm.o fifo_algorithm.o
-	g++ main.cpp utils.o algorithm.o fifo_algorithm.o
+a.out: main.cpp utils.o algorithm.o fifo_algorithm.o random_algorithm.o
+	g++ main.cpp utils.o algorithm.o fifo_algorithm.o random_algorithm.o
 
 utils.o: utils.cpp
 	g++ -c utils.cpp
