@@ -1,1 +1,1 @@
-./a.out --algorithm lru --trace pinatrace.out --pages 10% --page_size 4k
+./a.out --algorithm second_chance --trace pinatrace.out --pages 10% --page_size 4k
