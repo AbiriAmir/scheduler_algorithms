@@ -10,7 +10,7 @@ public:
 	FifoAlgorithm(int number_of_frames, int page_size);
 protected:
 	std::list<long long> pages;
-	void _access(long long address);
+	void _access(long long page);
 };
 
 #endif

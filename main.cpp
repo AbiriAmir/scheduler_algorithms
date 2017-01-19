@@ -5,10 +5,12 @@
 #include "Algorithm.h"
 #include "FifoAlgorithm.h"
 #include "RandomAlgorithm.h"
+#include "LruAlgorithm.h"
 #include <fstream>
 
 #define FIFO_ALGO "fifo"
 #define RANDOM_ALGO "random"
+#define LRU_ALGO "lru"
 
 #define DEFAULT_FILE_NAME "pinatrace.out"
 #define DEFAULT_NUMBER_OF_FRAMES "10%"
@@ -66,6 +68,8 @@ int main(int argc, char *argv[]) {
 		algo = new FifoAlgorithm(number_of_frames, page_size);
 	else if (algorithm_str == RANDOM_ALGO)
 		algo = new RandomAlgorithm(number_of_frames, page_size);
+	else if (algorithm_str == LRU_ALGO)
+		algo = new LruAlgorithm(number_of_frames, page_size);
 
 	for(int i = 0; i < references.size(); ++i)
 		algo->access(references[i].first, references[i].second);

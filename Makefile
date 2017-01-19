@@ -1,5 +1,5 @@
-a.out: main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o
-	g++ main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o
+a.out: main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o
+	g++ main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o
 
 utils.o: utils.cpp
 	g++ -c utils.cpp
@@ -12,3 +12,6 @@ FifoAlgorithm.o: FifoAlgorithm.cpp
 
 RandomAlgorithm.o: RandomAlgorithm.cpp
 	g++ -c RandomAlgorithm.cpp
+
+LruAlgorithm.o: LruAlgorithm.cpp
+	g++ -c LruAlgorithm.cpp
