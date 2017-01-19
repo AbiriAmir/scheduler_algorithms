@@ -1,1 +1,1 @@
-# scheduler_algorithms
+# CPU Scheduler Algorithms
