@@ -24,9 +24,9 @@ typedef long long ll;
 
 int main(int argc, char *argv[]) {
 
-	if(argc < 9) {
-		return -1;
-	}
+	// if(argc < 9) {
+	// 	return -1;
+	// }
 
 	string algorithm_str = FIFO_ALGO; // (argv[2]);
 	string file_name = DEFAULT_FILE_NAME; // (argv[4]);
