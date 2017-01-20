@@ -7,12 +7,14 @@
 #include "RandomAlgorithm.h"
 #include "LruAlgorithm.h"
 #include "SecondChanceAlgorithm.h"
+#include "OptimalAlgorithm.h"
 #include <fstream>
 
 #define FIFO_ALGO "fifo"
 #define RANDOM_ALGO "random"
 #define LRU_ALGO "lru"
 #define SECOND_CHANCE_ALGO "second_chance"
+#define OPTIMAL_ALGO "optimal"
 
 #define DEFAULT_FILE_NAME "pinatrace.out"
 #define DEFAULT_NUMBER_OF_FRAMES "10%"
@@ -74,9 +76,16 @@ int main(int argc, char *argv[]) {
 		algo = new LruAlgorithm(number_of_frames, page_size);
 	else if (algorithm_str == SECOND_CHANCE_ALGO)
 		algo = new SecondChanceAlgorithm(number_of_frames, page_size);
+	else if (algorithm_str == OPTIMAL_ALGO)
+		algo = new OptimalAlgorithm(number_of_frames, page_size, references);
 
-	for(int i = 0; i < references.size(); ++i)
+	for(int i = 0; i < references.size(); ++i){
+
 		algo->access(references[i].first, references[i].second);
+		// cout << "Number of page faults: " << algo->get_number_of_page_faults() << endl;
+
+
+	}
 
 	cout << "Total number of memory references: " << references.size() << endl;
 	cout << "Number of pages: " << number_of_pages << endl;

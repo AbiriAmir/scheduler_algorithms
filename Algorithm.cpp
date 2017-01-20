@@ -14,7 +14,6 @@ void Algorithm::access(long long address, int bytes) {
 	long long page;
 	for(int i = 0; i < bytes; ++i) {
 		page = (address + i) / page_size;
-
 		this->_access(page);
 	}
 }

@@ -1,5 +1,5 @@
-a.out: main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o SecondChanceAlgorithm.o PageEntity.o
-	g++ main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o SecondChanceAlgorithm.o PageEntity.o
+a.out: main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o SecondChanceAlgorithm.o PageEntity.o OptimalAlgorithm.o
+	g++ main.cpp utils.o Algorithm.o FifoAlgorithm.o RandomAlgorithm.o LruAlgorithm.o SecondChanceAlgorithm.o PageEntity.o OptimalAlgorithm.o
 
 utils.o: utils.cpp
 	g++ -c utils.cpp
@@ -21,3 +21,6 @@ PageEntity.o: PageEntity.cpp
 
 SecondChanceAlgorithm.o: SecondChanceAlgorithm.cpp
 	g++ -c SecondChanceAlgorithm.cpp
+
+OptimalAlgorithm.o: OptimalAlgorithm.cpp
+	g++ -c OptimalAlgorithm.cpp
