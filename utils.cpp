@@ -66,7 +66,7 @@ static inline std::string &trim(std::string &s) {
 }
 
 
-void get_memory_references(string file_name, vector< pair<long long, int> > &references) {
+void get_memory_references(string file_name, vector< MemoryReference > &references) {
 	ifstream fin(file_name.c_str());
 
 	references.clear();
@@ -80,16 +80,19 @@ void get_memory_references(string file_name, vector< pair<long long, int> > &ref
 		long long addr = hex2l(tokens[2]);
 		int count = atoi(tokens[3].c_str());
 
-		references.push_back(make_pair(addr, count));
+		MemoryReference::AccessType accessType = tokens[1] == "W" ? MemoryReference::WRITE : MemoryReference::READ;
+
+		MemoryReference mr(addr, count, accessType);
+		references.push_back( mr );
 	}
 }
 
-int needed_pages(int page_size, const vector< pair<long long, int> > &references) {
+int needed_pages(int page_size, const vector< MemoryReference > &references) {
 	set<long long> bytes;
 
 	for(int i = 0; i < references.size(); ++i) {
-		long long addr = references[i].first;
-		int count = references[i].second;
+		long long addr = references[i].address;
+		int count = references[i].bytes;
 
 		for(int i = 0; i < count; ++i)
 			bytes.insert((addr + count) / page_size);

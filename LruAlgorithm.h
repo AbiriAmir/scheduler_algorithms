@@ -11,7 +11,7 @@ public:
 protected:
 	std::list< std::pair<long long, int> > pages;
 	std::list< std::pair<long long, int> >::iterator getMin();
-	void _access(long long page);
+	void _access(long long page, MemoryReference::AccessType accessType);
 	int access_num;
 };
 

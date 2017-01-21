@@ -7,16 +7,17 @@
 #include <cstring>
 #include <cstdlib>
 #include <utility>
+#include "MemoryReference.h"
 
 class OptimalAlgorithm : public Algorithm {
 public:
-	OptimalAlgorithm(int number_of_frames, int page_size, std::vector< std::pair<long long, int> > &references);
-	void access(long long address, int bytes = 1);
+	OptimalAlgorithm(int number_of_frames, int page_size, std::vector< MemoryReference > &references);
+	void access(MemoryReference);
 protected:
 	std::vector<long long> pages;
-	std::list< std::pair<long long, int> > references;
+	std::list< MemoryReference > references;
 	
-	void _access(long long address);
+	void _access(long long page, MemoryReference::AccessType);
 
 	int find_victim();
 };

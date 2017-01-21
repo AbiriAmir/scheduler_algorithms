@@ -9,7 +9,7 @@ RandomAlgorithm::RandomAlgorithm(int number_of_frames, int page_size) : Algorith
 	srand(time(0));
 }
 
-void RandomAlgorithm::_access(long long page) {
+void RandomAlgorithm::_access(long long page, MemoryReference::AccessType accessType) {
 	for(vector<long long>::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if(*it == page)
 			return;

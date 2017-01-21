@@ -7,13 +7,16 @@
 #include "RandomAlgorithm.h"
 #include "LruAlgorithm.h"
 #include "SecondChanceAlgorithm.h"
+#include "EnhancedSecondChanceAlgorithm.h"
 #include "OptimalAlgorithm.h"
 #include <fstream>
+#include "MemoryReference.h"
 
 #define FIFO_ALGO "fifo"
 #define RANDOM_ALGO "random"
 #define LRU_ALGO "lru"
 #define SECOND_CHANCE_ALGO "second_chance"
+#define ENHANCED_SECOND_CHANCE_ALGO "enhanced_second_chance"
 #define OPTIMAL_ALGO "optimal"
 
 #define DEFAULT_FILE_NAME "pinatrace.out"
@@ -54,7 +57,7 @@ int main(int argc, char *argv[]) {
 	}
 
 
-	vector< pair<long long, int> > references;
+	vector< MemoryReference > references;
 	get_memory_references(file_name, references);
 
 	int page_size = get_page_size(page_size_str);
@@ -78,10 +81,12 @@ int main(int argc, char *argv[]) {
 		algo = new SecondChanceAlgorithm(number_of_frames, page_size);
 	else if (algorithm_str == OPTIMAL_ALGO)
 		algo = new OptimalAlgorithm(number_of_frames, page_size, references);
+	else if (algorithm_str == ENHANCED_SECOND_CHANCE_ALGO)
+		algo = new EnhancedSecondChanceAlgorithm(number_of_frames, page_size);
 
 	for(int i = 0; i < references.size(); ++i){
 
-		algo->access(references[i].first, references[i].second);
+		algo->access(references[i]);
 		// cout << "Number of page faults: " << algo->get_number_of_page_faults() << endl;
 
 

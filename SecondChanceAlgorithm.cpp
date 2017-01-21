@@ -7,7 +7,7 @@ SecondChanceAlgorithm::SecondChanceAlgorithm(int number_of_frames, int page_size
 	pointer = pages.end();
 }
 
-void SecondChanceAlgorithm::_access(long long page) {
+void SecondChanceAlgorithm::_access(long long page, MemoryReference::AccessType accessType) {
 	for(list<PageEntity>::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if(it->page() == page) {
 			it->set_reference_bit();

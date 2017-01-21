@@ -12,7 +12,7 @@ public:
 protected:
 	std::list<PageEntity> pages;
 	std::list<PageEntity>::iterator pointer;
-	void _access(long long address);
+	void _access(long long page, MemoryReference::AccessType);
 };
 
 #endif

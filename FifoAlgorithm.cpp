@@ -6,7 +6,7 @@ FifoAlgorithm::FifoAlgorithm(int number_of_frames, int page_size) : Algorithm(nu
 	// this->pages.resize(number_of_frames, -1);
 }
 
-void FifoAlgorithm::_access(long long page) {
+void FifoAlgorithm::_access(long long page, MemoryReference::AccessType accessType) {
 	for(list<long long>::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if(*it == page)
 			return;

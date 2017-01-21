@@ -4,7 +4,7 @@
 
 using namespace std;
 
-OptimalAlgorithm::OptimalAlgorithm(int number_of_frames, int page_size, vector< pair<long long, int> > &_references) : 
+OptimalAlgorithm::OptimalAlgorithm(int number_of_frames, int page_size, vector< MemoryReference > &_references) : 
 	Algorithm(number_of_frames, page_size) {
 	// references = _references;
 	for(int i = 0; i < _references.size(); ++i)
@@ -21,10 +21,10 @@ int OptimalAlgorithm::find_victim() {
 		s.insert(pages[i]);
 	}
 
-	for(list< pair<long long, int> >::iterator i = references.begin(); i != references.end() && s.size() > 1; ++i) {
-		for(int j = 0; j < (*i).second && s.size() > 1; ++j) {
+	for(list< MemoryReference >::iterator i = references.begin(); i != references.end() && s.size() > 1; ++i) {
+		for(int j = 0; j < (*i).bytes && s.size() > 1; ++j) {
 			// cerr << "erasing " << ((*i).first + j) / page_size << endl;
-			s.erase(((*i).first + j) / page_size);
+			s.erase(((*i).address + j) / page_size);
 		}
 	}
 
@@ -51,13 +51,13 @@ int OptimalAlgorithm::find_victim() {
 	return -1;
 }
 
-void OptimalAlgorithm::access(long long address, int bytes) {
+void OptimalAlgorithm::access(MemoryReference memoryReference) {
 	this->references.pop_front();
-	Algorithm::access(address, bytes);
+	Algorithm::access(memoryReference);
 }
 
 
-void OptimalAlgorithm::_access(long long page) {
+void OptimalAlgorithm::_access(long long page, MemoryReference::AccessType accessType) {
 	for(vector<long long>::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if(*it == page)
 			return;

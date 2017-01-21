@@ -8,7 +8,7 @@ LruAlgorithm::LruAlgorithm(int number_of_frames, int page_size) : Algorithm(numb
 	this->access_num = 0;
 }
 
-void LruAlgorithm::_access(long long page) {
+void LruAlgorithm::_access(long long page, MemoryReference::AccessType accessType) {
 	for(list< pair<long long, int> >::iterator it = pages.begin(); it != pages.end(); ++it) {
 		if((*it).first == page) {
 			(*it).second = access_num++;
